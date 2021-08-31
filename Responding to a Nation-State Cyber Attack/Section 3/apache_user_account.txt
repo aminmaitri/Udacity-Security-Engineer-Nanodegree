@@ -1,0 +1,21 @@
+1] create a new user and set apassword for the user:
+
+useradd apache-user
+passwd apachce-user
+
+2]create new group called "apache-group"
+
+groupadd apache-group
+
+3]Moving the user to a new group
+
+usermod -g apache-group apache-user
+
+4]In order to deny the apache-user user access to the su command, I modified the /etc/sudoers file by adding this line to the end of the file:
+
+sudo gedit /etc/sudoers
+
+apache-user  ALL=(ALL) ALL,!/bin/su
+
+
+

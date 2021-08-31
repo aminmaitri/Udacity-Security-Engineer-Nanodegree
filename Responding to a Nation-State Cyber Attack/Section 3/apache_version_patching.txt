@@ -1,0 +1,31 @@
+1] output shows Apache version
+
+vulnerability Detection Result
+
+Detected Apache
+
+Version:  2.4.7
+Location: 80/tcp
+CPE:      cpe:/a:apache:http_server:2.4.7
+
+Concluded from version/product identification result:
+Server: Apache/2.4.7
+
+
+
+2] Output after patch:
+
+After patch /etc/apache2/apache2.conf file.Add lines in config file which is:
+
+ServerTokens Prod
+ServerSignature Off 
+
+Result:
+
+vulnerability Detection Result
+
+Detected Apache
+
+Version:  unknown
+Location: 80/tcp
+CPE:      cpe:/a:apache:http_server 
