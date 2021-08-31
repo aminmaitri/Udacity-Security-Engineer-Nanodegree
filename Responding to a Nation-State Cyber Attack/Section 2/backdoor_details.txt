@@ -1,0 +1,36 @@
+1] Rouge Username: Darklord
+   I found it from /var/log/auth.log file
+
+output:-
+
+Sep 22 10:54:10 ubuntu-VirtualBox su[2955]: pam_unix(su:session): session opened for user root by ubuntu(uid=0)
+Sep 22 10:54:28 ubuntu-VirtualBox groupadd[2967]: group added to /etc/group: name=darklord, GID=1001
+Sep 22 10:54:28 ubuntu-VirtualBox groupadd[2967]: group added to /etc/gshadow: name=darklord
+Sep 22 10:54:28 ubuntu-VirtualBox groupadd[2967]: new group: name=darklord, GID=1001
+Sep 22 10:54:28 ubuntu-VirtualBox useradd[2971]: new user: name=darklord, UID=1001, GID=1001, home=/home/darklord, shell=/bin/bash
+
+
+2] Locate the malicious process:- Malicious process runs in /tmp file.Also process name is remotesec 
+
+output:
+
+root@ubuntu-VirtualBox:/# ps -aux | grep 918
+root       918  0.0  0.0   2592   320 ?        SN   11:21   0:00 /tmp/remotesec -k -l 56565
+
+
+3] Port number: 56565
+
+output:
+
+ubuntu@ubuntu-VirtualBox:~$ sudo netstat -antp
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 127.0.0.1:3306          0.0.0.0:*               LISTEN      987/mysqld      
+tcp        0      0 127.0.1.1:53            0.0.0.0:*               LISTEN      1154/dnsmasq    
+tcp        0      0 0.0.0.0:56565           0.0.0.0:*               LISTEN      918/remotesec   
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      848/sshd        
+tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN      468/cupsd       
+tcp        0      0 127.0.0.1:5432          0.0.0.0:*               LISTEN      1903/postgres   
+tcp6       0      0 :::80                   :::*                    LISTEN      2484/apache2    
+tcp6       0      0 :::22                   :::*                    LISTEN      848/sshd    
+
